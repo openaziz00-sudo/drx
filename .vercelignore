@@ -12,10 +12,10 @@ gentle-ai-backend-nodejs/node_modules/
 __pycache__/
 *.pyc
 
-# Design and documentation files
-design-references/
-design-ref/
-assets/
+# Design and documentation files (root level only)
+/design-references/
+/design-ref/
+/assets/
 *.md
 !README.md
 
