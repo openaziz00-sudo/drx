@@ -1,20 +1,36 @@
-# Ignore old backend
-gentle_ai_backend/
-
-# Ignore development files
+# Environment files
+.env
 .env.local
 .env.development
 
-# Ignore node_modules
+# Node modules
 node_modules/
+gentle-ai-frontend/node_modules/
+gentle-ai-backend-nodejs/node_modules/
 
-# Ignore Python cache
+# Python cache
 __pycache__/
 *.pyc
 
-# Ignore design files
+# Design and documentation files
 design-references/
+design-ref/
 assets/
 *.md
 !README.md
-!README-DEPLOYMENT.md
+
+# Source files (only built files needed)
+gentle-ai-frontend/src/
+gentle-ai-frontend/public/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Git
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db

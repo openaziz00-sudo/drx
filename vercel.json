@@ -2,18 +2,26 @@
   "version": 2,
   "builds": [
     {
-      "src": "gentle-ai-backend-nodejs/server.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "gentle-ai-backend-nodejs/public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "gentle-ai-backend-nodejs/server.js"
+      "dest": "/api/index.js"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|json))",
+      "dest": "/gentle-ai-backend-nodejs/public/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "gentle-ai-backend-nodejs/server.js"
+      "dest": "/api/index.js"
     }
   ],
   "env": {
