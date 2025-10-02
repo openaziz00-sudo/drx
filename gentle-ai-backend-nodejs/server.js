@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const chatRoutes = require('./routes/chat');
+const authRoutes = require('./routes/auth');
+const conversationsRoutes = require('./routes/conversations');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,6 +15,8 @@ app.use(express.json());
 
 // API Routes
 app.use('/api', chatRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/conversations', conversationsRoutes);
 
 // Serve static files from React app
 app.use(express.static(path.join(__dirname, 'public')));

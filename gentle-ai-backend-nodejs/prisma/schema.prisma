@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  password      String
+  stackUserId   String?        @unique
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  conversations Conversation[]
+  apiKeys       ApiKey[]
+
+  @@map("users")
+}
+
+// Conversation model
+model Conversation {
+  id        String    @id @default(cuid())
+  title     String    @default("محادثة جديدة")
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("conversations")
+  @@index([userId])
+}
+
+// Message model
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String       // "user" or "assistant"
+  content        String       @db.Text
+  model          String?      // النموذج المستخدم (gpt-4, deepseek, etc.)
+  tokens         Int?         // عدد التوكنات المستخدمة
+  createdAt      DateTime     @default(now())
+
+  @@map("messages")
+  @@index([conversationId])
+}
+
+// API Key model for user API access
+model ApiKey {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  name      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isActive  Boolean  @default(true)
+  lastUsed  DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("api_keys")
+  @@index([userId])
+}
