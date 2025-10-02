@@ -4,10 +4,20 @@
   "description": "Gentle AI - Advanced AI Chat Platform",
   "scripts": {
     "build": "bash build.sh",
-    "start": "cd gentle-ai-backend-nodejs && node server.js",
-    "dev": "cd gentle-ai-backend-nodejs && npm run dev"
+    "start": "node api/index.js",
+    "vercel-build": "cd gentle-ai-frontend && npm install --legacy-peer-deps && npm run build && mkdir -p ../gentle-ai-backend-nodejs/public && cp -r dist/* ../gentle-ai-backend-nodejs/public/ && cd ../gentle-ai-backend-nodejs && npm install && npx prisma generate"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "openai": "^4.20.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "@prisma/client": "^5.7.0",
+    "prisma": "^5.7.0"
   }
 }
