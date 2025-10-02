@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "buildCommand": "cd gentle-ai-frontend && pnpm install && pnpm build",
+  "outputDirectory": "gentle-ai-frontend/dist",
+  "framework": null,
+  "functions": {
+    "api/**/*.py": {
+      "runtime": "python3.9"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/chat",
+      "destination": "/api/chat"
+    },
+    {
+      "source": "/api/chat/deepseek",
+      "destination": "/api/deepseek"
+    },
+    {
+      "source": "/api/models",
+      "destination": "/api/models"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/gentle-ai-frontend/dist/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ]
+}

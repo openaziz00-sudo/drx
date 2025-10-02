@@ -1,0 +1,20 @@
+# Ignore old backend
+gentle_ai_backend/
+
+# Ignore development files
+.env.local
+.env.development
+
+# Ignore node_modules
+node_modules/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore design files
+design-references/
+assets/
+*.md
+!README.md
+!README-DEPLOYMENT.md
