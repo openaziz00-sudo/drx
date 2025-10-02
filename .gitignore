@@ -66,3 +66,4 @@ temp/
 
 # Design reference images
 design-ref/
+VERCEL_ENV_VARS.txt
