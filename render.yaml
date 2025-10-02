@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: gentle-ai
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: cd gentle-ai-frontend && npm install --legacy-peer-deps && npm run build && mkdir -p ../gentle-ai-backend-nodejs/public && cp -r dist/* ../gentle-ai-backend-nodejs/public/ && cd ../gentle-ai-backend-nodejs && npm install && npx prisma generate && npx prisma migrate deploy
+    startCommand: cd gentle-ai-backend-nodejs && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
