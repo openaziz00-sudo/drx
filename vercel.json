@@ -1,48 +1,22 @@
 {
   "version": 2,
-  "buildCommand": "cd gentle-ai-frontend && pnpm install && pnpm build",
-  "outputDirectory": "gentle-ai-frontend/dist",
-  "framework": null,
-  "functions": {
-    "api/**/*.py": {
-      "runtime": "python3.9"
-    }
-  },
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/chat",
-      "destination": "/api/chat"
-    },
-    {
-      "source": "/api/chat/deepseek",
-      "destination": "/api/deepseek"
-    },
-    {
-      "source": "/api/models",
-      "destination": "/api/models"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/gentle-ai-frontend/dist/$1"
+      "src": "gentle-ai-backend-nodejs/server.js",
+      "use": "@vercel/node"
     }
   ],
-  "headers": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        }
-      ]
+      "src": "/api/(.*)",
+      "dest": "gentle-ai-backend-nodejs/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "gentle-ai-backend-nodejs/server.js"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
