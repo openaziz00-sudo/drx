@@ -19,9 +19,7 @@ assets/
 *.md
 !README.md
 
-# Source files (only built files needed)
-gentle-ai-frontend/src/
-gentle-ai-frontend/public/
+# Don't ignore source files - needed for build
 
 # Logs
 *.log
